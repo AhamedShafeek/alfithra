@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Map | Teacher | KidTracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="KidTracker Logo" class="h-8 w-auto">
+                    <span class="ml-2 font-semibold text-xl">KidTracker</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Ms. Johnson</span>
+                    <div class="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <span class="text-sm font-medium">MJ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white shadow-md h-screen fixed">
+            <div class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="teacher-dashboard.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-feed.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-stream mr-2"></i> Daily Feed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-roster.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-users mr-2"></i> Class Roster
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-map.html" class="block p-3 bg-blue-100 text-blue-800 rounded-lg font-medium">
+                            <i class="fas fa-map-marked-alt mr-2"></i> Adventure Map
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-messages.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-comments mr-2"></i> Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 border-t mt-6">
+                <a href="index.html" class="block p-3 text-red-600 hover:bg-red-50 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="ml-64 p-8 flex-1">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Adventure Map</h1>
+                    <p class="text-gray-600">Create and manage learning milestones</p>
+                </div>
+                <div class="flex space-x-3">
+                    <button id="addMilestoneBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
+                        <i class="fas fa-plus mr-2"></i> Add Milestone
+                    </button>
+                    <div class="relative">
+                        <button id="themeSelectBtn" class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-palette mr-2"></i> Map Theme <i class="fas fa-chevron-down ml-2"></i>
+                        </button>
+                        <div id="themeDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden z-10">
+                            <div class="py-1">
+                                <a href="#" class="theme-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-theme="jungle">Jungle Adventure</a>
+                                <a href="#" class="theme-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-theme="space">Space Exploration</a>
+                                <a href="#" class="theme-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-theme="ocean">Ocean Discovery</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map Container -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden relative">
+                <div class="absolute top-4 left-4 z-10 bg-white p-2 rounded-lg shadow-md">
+                    <h3 class="font-semibold text-gray-800">Jungle Adventure</h3>
+                    <p class="text-xs text-gray-600">Semester 1 Learning Path</p>
+                </div>
+                
+                <div id="mapContainer" class="relative h-[600px] overflow-auto">
+                    <!-- Map Background -->
+                    <div class="absolute inset-0 w-full h-full">
+                        <img src="assets/images/map-theme-jungle.png" alt="Jungle Map Background" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Map Milestones -->
+                    <!-- These would be positioned absolutely with draggable functionality in a real app -->
+                    <div class="milestone absolute top-[100px] left-[150px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center cursor-move z-20" data-id="1">
+                        <div class="w-14 h-14 rounded-full bg-green-100 border-4 border-green-500 flex items-center justify-center">
+                            <span class="text-lg font-bold text-green-700">1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone absolute top-[180px] left-[300px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center cursor-move z-20" data-id="2">
+                        <div class="w-14 h-14 rounded-full bg-blue-100 border-4 border-blue-500 flex items-center justify-center">
+                            <span class="text-lg font-bold text-blue-700">2</span>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone absolute top-[320px] left-[450px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center cursor-move z-20" data-id="3">
+                        <div class="w-14 h-14 rounded-full bg-purple-100 border-4 border-purple-500 flex items-center justify-center">
+                            <span class="text-lg font-bold text-purple-700">3</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Path Lines (SVG would be used in a real implementation) -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none z-10">
+                        <path d="M158,108 L300,180" stroke="#10B981" stroke-width="6" stroke-dasharray="8 4" fill="none" />
+                        <path d="M300,180 L450,320" stroke="#10B981" stroke-width="6" stroke-dasharray="8 4" fill="none" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Milestone Editor (Hidden by default, shown when editing) -->
+            <div id="milestoneEditor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-md mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800">Edit Milestone</h2>
+                        <button id="closeEditorBtn" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <form id="milestoneForm" class="space-y-4">
+                        <input type="hidden" id="milestoneId" value="">
+                        
+                        <div>
+                            <label for="milestoneTitle" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                            <input type="text" id="milestoneTitle" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., Learn Letter A">
+                        </div>
+                        
+                        <div>
+                            <label for="milestoneDescription" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                            <textarea id="milestoneDescription" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="What will students learn?"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="milestoneType" class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                            <select id="milestoneType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                <option value="activity">Activity</option>
+                                <option value="skill">Skill</option>
+                                <option value="challenge">Challenge</option>
+                                <option value="assessment">Assessment</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Color Theme</label>
+                            <div class="flex space-x-3">
+                                <button type="button" class="color-option w-8 h-8 rounded-full bg-green-500 border-2 border-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" data-color="green"></button>
+                                <button type="button" class="color-option w-8 h-8 rounded-full bg-blue-500 border-2 border-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" data-color="blue"></button>
+                                <button type="button" class="color-option w-8 h-8 rounded-full bg-purple-500 border-2 border-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" data-color="purple"></button>
+                                <button type="button" class="color-option w-8 h-8 rounded-full bg-red-500 border-2 border-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" data-color="red"></button>
+                                <button type="button" class="color-option w-8 h-8 rounded-full bg-yellow-500 border-2 border-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" data-color="yellow"></button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end space-x-3 pt-4">
+                            <button type="button" id="deleteMilestoneBtn" class="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200">
+                                Delete
+                            </button>
+                            <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Toggle theme dropdown
+        document.getElementById('themeSelectBtn').addEventListener('click', function() {
+            document.getElementById('themeDropdown').classList.toggle('hidden');
+        });
+        
+        // Handle theme selection
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const theme = this.getAttribute('data-theme');
+                
+                // Update map background (in a real app)
+                document.getElementById('themeDropdown').classList.add('hidden');
+                
+                // This would update the background image and other theme elements
+                if (theme === 'jungle') {
+                    document.querySelector('#mapContainer img').src = 'assets/images/map-theme-jungle.png';
+                } else if (theme === 'space') {
+                    document.querySelector('#mapContainer img').src = 'assets/images/map-theme-space.png';
+                }
+            });
+        });
+        
+        // Handle milestone clicks to open editor
+        document.querySelectorAll('.milestone').forEach(milestone => {
+            milestone.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                openMilestoneEditor(id);
+            });
+        });
+        
+        // Add new milestone button
+        document.getElementById('addMilestoneBtn').addEventListener('click', function() {
+            openMilestoneEditor('new');
+        });
+        
+                // Close milestone editor
+        document.getElementById('closeEditorBtn').addEventListener('click', function() {
+            document.getElementById('milestoneEditor').classList.add('hidden');
+        });
+        
+        // Milestone form submission
+        document.getElementById('milestoneForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Save milestone data (in a real app, this would send to a server)
+            const id = document.getElementById('milestoneId').value;
+            const title = document.getElementById('milestoneTitle').value;
+            
+            document.getElementById('milestoneEditor').classList.add('hidden');
+            
+            // If it's a new milestone, you would add it to the map
+            if (id === 'new') {
+                // Add new milestone to the map (simplified)
+                const newMilestone = document.createElement('div');
+                newMilestone.className = 'milestone absolute top-[400px] left-[600px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center cursor-move z-20';
+                newMilestone.setAttribute('data-id', '4');
+                
+                newMilestone.innerHTML = `
+                    <div class="w-14 h-14 rounded-full bg-yellow-100 border-4 border-yellow-500 flex items-center justify-center">
+                        <span class="text-lg font-bold text-yellow-700">4</span>
+                    </div>
+                `;
+                
+                document.getElementById('mapContainer').appendChild(newMilestone);
+                
+                // Add event listener to the new milestone
+                newMilestone.addEventListener('click', function() {
+                    openMilestoneEditor('4');
+                });
+            }
+        });
+        
+        // Delete milestone button
+        document.getElementById('deleteMilestoneBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete this milestone?')) {
+                const id = document.getElementById('milestoneId').value;
+                
+                // Remove the milestone from the map (in a real app)
+                if (id !== 'new') {
+                    const milestone = document.querySelector(`.milestone[data-id="${id}"]`);
+                    if (milestone) milestone.remove();
+                }
+                
+                document.getElementById('milestoneEditor').classList.add('hidden');
+            }
+        });
+        
+        // Function to open milestone editor
+        function openMilestoneEditor(id) {
+            const editor = document.getElementById('milestoneEditor');
+            document.getElementById('milestoneId').value = id;
+            
+            // If editing an existing milestone, populate the form
+            if (id !== 'new') {
+                // In a real app, you would fetch the milestone data
+                // For demo, just set some placeholder values
+                document.getElementById('milestoneTitle').value = `Milestone ${id}`;
+                document.getElementById('milestoneDescription').value = 'Sample milestone description.';
+                document.getElementById('milestoneType').value = 'activity';
+            } else {
+                // Clear the form for a new milestone
+                document.getElementById('milestoneTitle').value = '';
+                document.getElementById('milestoneDescription').value = '';
+                document.getElementById('milestoneType').value = 'activity';
+            }
+            
+            editor.classList.remove('hidden');
+        }
+        
+        // In a real application, you would implement drag-and-drop functionality 
+        // for the milestones using libraries like interact.js or plain JavaScript
+    </script>
+</body>
+</html>

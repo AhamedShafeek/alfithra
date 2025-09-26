@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | KidTracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="KidTracker Logo" class="h-8 w-auto">
+                    <span class="ml-2 font-semibold text-xl">KidTracker</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Ms. Johnson</span>
+                    <div class="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <span class="text-sm font-medium">MJ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white shadow-md h-screen fixed">
+            <div class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="teacher-dashboard.html" class="block p-3 bg-blue-100 text-blue-800 rounded-lg font-medium">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-feed.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-stream mr-2"></i> Daily Feed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-roster.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-users mr-2"></i> Class Roster
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-map.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-map-marked-alt mr-2"></i> Adventure Map
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-messages.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-comments mr-2"></i> Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 border-t mt-6">
+                <a href="index.html" class="block p-3 text-red-600 hover:bg-red-50 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="ml-64 p-8 flex-1">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Welcome, Ms. Johnson!</h1>
+                    <p class="text-gray-600" id="currentDate">July 20, 2025</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <p class="text-gray-600">Sunshine Room</p>
+                    <p class="text-xl font-semibold">Pre-K (Ages 4-5)</p>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-xl shadow-md flex flex-col items-center transition-colors">
+                    <img src="assets/icons/camera.svg" alt="Camera icon" class="h-12 w-12 mb-2">
+                    <span class="text-lg font-medium">Log Activity</span>
+                </button>
+                
+                <button class="bg-purple-600 hover:bg-purple-700 text-white p-6 rounded-xl shadow-md flex flex-col items-center transition-colors">
+                    <i class="fas fa-clipboard-list text-4xl mb-2"></i>
+                    <span class="text-lg font-medium">Take Attendance</span>
+                </button>
+                
+                <button class="bg-green-600 hover:bg-green-700 text-white p-6 rounded-xl shadow-md flex flex-col items-center transition-colors">
+                    <i class="fas fa-bullhorn text-4xl mb-2"></i>
+                    <span class="text-lg font-medium">Send Announcement</span>
+                </button>
+            </div>
+            
+            <!-- Summary Widgets -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Today's Attendance</h3>
+                        <span class="text-sm bg-blue-100 text-blue-800 py-1 px-3 rounded-full">14/16 present</span>
+                    </div>
+                    <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: 87%"></div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600 text-sm">Missing: <span class="font-medium">Emma Davis, Lucas Wright</span></p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Pending Approvals</h3>
+                        <span class="text-sm bg-amber-100 text-amber-800 py-1 px-3 rounded-full">5 items</span>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="text-gray-600 flex items-center text-sm">
+                            <span class="w-2 h-2 bg-amber-500 rounded-full mr-2"></span>
+                            <span>3 field trip permission slips</span>
+                        </li>
+                        <li class="text-gray-600 flex items-center text-sm">
+                            <span class="w-2 h-2 bg-amber-500 rounded-full mr-2"></span>
+                            <span>2 medication authorizations</span>
+                        </li>
+                    </ul>
+                    <button class="mt-4 text-blue-600 hover:text-blue-800 text-sm font-medium">Review All</button>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Upcoming Events</h3>
+                        <span class="text-sm bg-purple-100 text-purple-800 py-1 px-3 rounded-full">This Week</span>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="text-gray-600 flex items-center text-sm">
+                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                            <span>Wed: Field Trip to Zoo</span>
+                        </li>
+                        <li class="text-gray-600 flex items-center text-sm">
+                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                            <span>Fri: Parent-Teacher Conferences</span>
+                        </li>
+                    </ul>
+                    <button class="mt-4 text-blue-600 hover:text-blue-800 text-sm font-medium">View Calendar</button>
+                </div>
+            </div>
+
+            <!-- Admin Section -->
+            <div id="admin-section" class="hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mt-12 mb-6">Admin Controls</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Create User Form -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Create New User</h3>
+                        <form id="createUserForm" class="space-y-4">
+                            <div>
+                                <label for="newUserEmail" class="block text-sm font-medium text-gray-700">User Email</label>
+                                <input type="email" id="newUserEmail" required class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label for="newUserPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                                <input type="password" id="newUserPassword" required class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label for="userRole" class="block text-sm font-medium text-gray-700">Role</label>
+                                <select id="userRole" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="teacher">Teacher</option>
+                                    <option value="parent">Parent</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg">Create User</button>
+                        </form>
+                    </div>
+
+                    <!-- Create Student Form -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Create Student Profile</h3>
+                        <form id="createStudentForm" class="space-y-4">
+                            <div>
+                                <label for="studentName" class="block text-sm font-medium text-gray-700">Student Name</label>
+                                <input type="text" id="studentName" required class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label for="studentAge" class="block text-sm font-medium text-gray-700">Age</label>
+                                <input type="number" id="studentAge" required class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                             <div>
+                                <label for="studentClass" class="block text-sm font-medium text-gray-700">Class</label>
+                                <input type="text" id="studentClass" required class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <button type="submit" class="w-full py-2 px-4 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-lg">Create Student</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Set current date
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+    </script>
+    <script type="module">
+        import { createUser, createStudentProfile } from './auth.js';
+
+        // Show admin section if the user is admin
+        // This is a simple check. In a real app, you'd have a more secure way to determine this.
+        if (sessionStorage.getItem('userRole') === 'admin') {
+            document.getElementById('admin-section').classList.remove('hidden');
+        }
+
+        document.getElementById('createUserForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('newUserEmail').value;
+            const password = document.getElementById('newUserPassword').value;
+            const role = document.getElementById('userRole').value;
+            createUser(email, password, role);
+        });
+
+        document.getElementById('createStudentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const studentData = {
+                name: document.getElementById('studentName').value,
+                age: document.getElementById('studentAge').value,
+                class: document.getElementById('studentClass').value,
+            };
+            createStudentProfile(studentData);
+        });
+    </script>
+</body>
+</html>

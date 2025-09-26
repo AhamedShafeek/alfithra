@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages | Parent | KidTracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-purple-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="KidTracker Logo" class="h-8 w-auto">
+                    <span class="ml-2 font-semibold text-xl">KidTracker</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Rebecca Davis</span>
+                    <div class="h-8 w-8 rounded-full bg-purple-600 flex items-center justify-center">
+                        <span class="text-sm font-medium">RD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white shadow-md h-screen fixed">
+            <div class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="parent-dashboard.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-feed.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-stream mr-2"></i> Daily Feed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-map.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-map-marked-alt mr-2"></i> Adventure Map
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-messages.html" class="block p-3 bg-purple-100 text-purple-800 rounded-lg font-medium">
+                            <i class="fas fa-comments mr-2"></i> Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 border-t mt-6">
+                <a href="index.html" class="block p-3 text-red-600 hover:bg-red-50 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content - Chat Interface -->
+        <main class="ml-64 flex-1 flex h-screen">
+            <!-- Chat Window -->
+            <div class="w-full flex flex-col">
+                <!-- Chat header -->
+                <div class="p-4 border-b bg-white flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                        <span class="font-medium text-blue-800">MJ</span>
+                    </div>
+                    <div>
+                        <h2 class="font-medium text-gray-900">Ms. Johnson</h2>
+                        <p class="text-sm text-gray-600">Emma's Teacher - Sunshine Room</p>
+                    </div>
+                </div>
+                
+                <!-- Chat messages -->
+                <div class="flex-1 p-4 overflow-y-auto bg-gray-50" id="messageContainer">
+                    <!-- Timestamp -->
+                    <div class="flex justify-center mb-4">
+                        <span class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">July 20, 2025</span>
+                    </div>
+                    
+                    <!-- Message from other person -->
+                    <div class="flex mb-4">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2 flex-shrink-0">
+                            <span class="font-medium text-xs text-blue-800">MJ</span>
+                        </div>
+                        <div class="max-w-xs bg-white rounded-lg p-3 shadow-sm">
+                            <p class="text-gray-800">Good morning, Mrs. Davis! I wanted to let you know that Emma has been doing exceptionally well with her letter recognition exercises.</p>
+                            <span class="text-xs text-gray-500 mt-1 block">9:30 AM</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Message from current user -->
+                    <div class="flex mb-4 justify-end">
+                        <div class="max-w-xs bg-purple-600 rounded-lg p-3 shadow-sm text-white">
+                            <p>That's wonderful news! We've been practicing at home too. She seems to really enjoy it.</p>
+                            <span class="text-xs text-purple-200 mt-1 block">9:45 AM</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Message from other person -->
+                    <div class="flex mb-4">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2 flex-shrink-0">
+                            <span class="font-medium text-xs text-blue-800">MJ</span>
+                        </div>
+                        <div class="max-w-xs bg-white rounded-lg p-3 shadow-sm">
+                            <p class="text-gray-800">Yes, she's really enthusiastic! She was able to recognize all 26 letters today, both uppercase and lowercase. I've posted a special achievement on her feed.</p>
+                            <span class="text-xs text-gray-500 mt-1 block">10:15 AM</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Message from current user -->
+                    <div class="flex mb-4 justify-end">
+                        <div class="max-w-xs bg-purple-600 rounded-lg p-3 shadow-sm text-white">
+                            <p>I just saw it! We're so proud of her progress. Thank you for the update and for all your work with her.</p>
+                            <span class="text-xs text-purple-200 mt-1 block">10:24 AM</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Message from other person -->
+                    <div class="flex mb-4">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2 flex-shrink-0">
+                            <span class="font-medium text-xs text-blue-800">MJ</span>
+                        </div>
+                        <div class="max-w-xs bg-white rounded-lg p-3 shadow-sm">
+                            <p class="text-gray-800">It's my pleasure! By the way, we have a field trip to the zoo next Wednesday. Has Emma been talking about it?</p>
+                            <span class="text-xs text-gray-500 mt-1 block">10:30 AM</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Message from current user -->
+                    <div class="flex mb-4 justify-end">
+                        <div class="max-w-xs bg-purple-600 rounded-lg p-3 shadow-sm text-white">
+                            <p>Yes, she's very excited! We'll make sure to return the permission slip tomorrow.</p>
+                            <span class="text-xs text-purple-200 mt-1 block">10:45 AM</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Message input -->
+                <div class="p-4 bg-white border-t">
+                    <form id="messageForm" class="flex items-center">
+                        <input type="text" id="messageInput" placeholder="Type a message..." 
+                            class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-purple-500 focus:border-purple-500">
+                        <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded-r-lg hover:bg-purple-700">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Handle message form submission
+        document.getElementById('messageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (message) {
+                // Add message to chat
+                addMessage(message, 'user');
+                
+                // Clear input
+                messageInput.value = '';
+                
+                // Scroll to bottom
+                const messageContainer = document.getElementById('messageContainer');
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+                
+                // In a real app, you would send this message to the server
+                // For demo, simulate a reply after 1 second
+                setTimeout(() => {
+                    addMessage('Thanks for your message. I'll respond shortly!', 'teacher');
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                }, 1000);
+            }
+        });
+        
+        // Function to add a message to the chat
+        function addMessage(text, sender) {
+            const messageContainer = document.getElementById('messageContainer');
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'});
+            
+            const messageDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                messageDiv.className = 'flex mb-4 justify-end';
+                messageDiv.innerHTML = `
+                    <div class="max-w-xs bg-purple-600 rounded-lg p-3 shadow-sm text-white">
+                        <p>${text}</p>
+                        <span class="text-xs text-purple-200 mt-1 block">${timeString}</span>
+                    </div>
+                `;
+            } else {
+                messageDiv.className = 'flex mb-4';
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2 flex-shrink-0">
+                        <span class="font-medium text-xs text-blue-800">MJ</span>
+                    </div>
+                    <div class="max-w-xs bg-white rounded-lg p-3 shadow-sm">
+                        <p class="text-gray-800">${text}</p>
+                        <span class="text-xs text-gray-500 mt-1 block">${timeString}</span>
+                    </div>
+                `;
+            }
+            
+            messageContainer.appendChild(messageDiv);
+        }
+    </script>
+</body>
+</html>

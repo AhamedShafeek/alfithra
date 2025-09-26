@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Map | Parent | KidTracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-purple-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="KidTracker Logo" class="h-8 w-auto">
+                    <span class="ml-2 font-semibold text-xl">KidTracker</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Rebecca Davis</span>
+                    <div class="h-8 w-8 rounded-full bg-purple-600 flex items-center justify-center">
+                        <span class="text-sm font-medium">RD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white shadow-md h-screen fixed">
+            <div class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="parent-dashboard.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-feed.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-stream mr-2"></i> Daily Feed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-map.html" class="block p-3 bg-purple-100 text-purple-800 rounded-lg font-medium">
+                            <i class="fas fa-map-marked-alt mr-2"></i> Adventure Map
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-messages.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-comments mr-2"></i> Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 border-t mt-6">
+                <a href="index.html" class="block p-3 text-red-600 hover:bg-red-50 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="ml-64 p-8 flex-1">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Emma's Adventure Map</h1>
+                    <p class="text-gray-600">Follow Emma's learning journey</p>
+                </div>
+                <div class="bg-purple-50 p-3 rounded-lg text-center">
+                    <p class="text-sm text-purple-700">Current Milestone</p>
+                    <p class="text-2xl font-bold text-purple-800">3</p>
+                    <p class="text-xs text-purple-600">of 10 total</p>
+                </div>
+            </div>
+            
+            <!-- Map Container -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden relative">
+                <div class="absolute top-4 left-4 z-10 bg-white p-2 rounded-lg shadow-md">
+                    <h3 class="font-semibold text-gray-800">Jungle Adventure</h3>
+                    <p class="text-xs text-gray-600">Semester 1 Learning Path</p>
+                </div>
+                
+                <div id="mapContainer" class="relative h-[600px] overflow-auto">
+                    <!-- Map Background -->
+                    <div class="absolute inset-0 w-full h-full">
+                        <img src="assets/images/map-theme-jungle.png" alt="Jungle Map Background" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Map Milestones -->
+                    <div class="milestone absolute top-[100px] left-[150px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center z-20 cursor-pointer milestone-completed" data-id="1">
+                        <div class="w-14 h-14 rounded-full bg-green-100 border-4 border-green-500 flex items-center justify-center">
+                            <i class="fas fa-check text-lg text-green-700"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone absolute top-[180px] left-[300px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center z-20 cursor-pointer milestone-completed" data-id="2">
+                        <div class="w-14 h-14 rounded-full bg-green-100 border-4 border-green-500 flex items-center justify-center">
+                            <i class="fas fa-check text-lg text-green-700"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone absolute top-[320px] left-[450px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center z-20 cursor-pointer milestone-current" data-id="3">
+                        <div class="w-14 h-14 rounded-full bg-purple-100 border-4 border-purple-500 flex items-center justify-center animate-pulse">
+                            <span class="text-lg font-bold text-purple-700">3</span>
+                        </div>
+                        
+                        <!-- Character avatar on the current milestone -->
+                        <div class="absolute -bottom-6 w-12 h-12">
+                            <div class="w-full h-full rounded-full bg-pink-100 border-2 border-white shadow-md flex items-center justify-center">
+                                <span class="text-sm font-bold text-pink-700">ED</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone absolute top-[260px] left-[620px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center z-20 cursor-pointer milestone-locked" data-id="4">
+                        <div class="w-14 h-14 rounded-full bg-gray-100 border-4 border-gray-300 flex items-center justify-center">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone absolute top-[150px] left-[750px] w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center z-20 cursor-pointer milestone-locked" data-id="5">
+                        <div class="w-14 h-14 rounded-full bg-gray-100 border-4 border-gray-300 flex items-center justify-center">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Path Lines (SVG would be used in a real implementation) -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none z-10">
+                        <path d="M158,108 L300,180" stroke="#10B981" stroke-width="6" fill="none" />
+                        <path d="M300,180 L450,320" stroke="#10B981" stroke-width="6" fill="none" />
+                                                <path d="M450,320 L620,260" stroke="#D1D5DB" stroke-width="6" stroke-dasharray="8 4" fill="none" />
+                        <path d="M620,260 L750,150" stroke="#D1D5DB" stroke-width="6" stroke-dasharray="8 4" fill="none" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Milestone Details (initially hidden, shown when a milestone is clicked) -->
+            <div id="milestoneDetails" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-md mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800" id="milestoneTitle">Milestone 1: Alphabet Recognition</h2>
+                        <button id="closeDetailsBtn" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-4 p-3 rounded-lg" id="milestoneStatus">
+                        <!-- Status will be filled by JavaScript -->
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Description</h3>
+                        <p class="text-gray-700" id="milestoneDescription">Learn to recognize and write all 26 letters of the alphabet.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Activities Completed</h3>
+                        <ul class="space-y-2" id="milestoneActivities">
+                            <!-- Activities will be filled by JavaScript -->
+                        </ul>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button id="closeMilestoneBtn" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition duration-200">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Handle milestone clicks to show details
+        document.querySelectorAll('.milestone').forEach(milestone => {
+            milestone.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                showMilestoneDetails(id);
+            });
+        });
+        
+        // Close milestone details
+        document.getElementById('closeDetailsBtn').addEventListener('click', function() {
+            document.getElementById('milestoneDetails').classList.add('hidden');
+        });
+        
+        document.getElementById('closeMilestoneBtn').addEventListener('click', function() {
+            document.getElementById('milestoneDetails').classList.add('hidden');
+        });
+        
+        // Function to show milestone details
+        function showMilestoneDetails(id) {
+            const detailsPanel = document.getElementById('milestoneDetails');
+            const statusPanel = document.getElementById('milestoneStatus');
+            const activitiesList = document.getElementById('milestoneActivities');
+            
+            // Clear previous activities
+            activitiesList.innerHTML = '';
+            
+            // Set milestone title and description based on ID
+            if (id === '1') {
+                document.getElementById('milestoneTitle').textContent = 'Milestone 1: Alphabet Recognition';
+                document.getElementById('milestoneDescription').textContent = 'Learn to recognize and write all 26 letters of the alphabet.';
+                
+                // Set status for completed milestone
+                statusPanel.className = 'mb-4 p-3 rounded-lg bg-green-50';
+                statusPanel.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-check text-green-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-green-800">Completed</p>
+                            <p class="text-sm text-green-600">July 10, 2025</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Add activities
+                const activities = [
+                    'Identified all uppercase letters',
+                    'Matched lowercase letters to uppercase',
+                    'Wrote name using proper capitalization'
+                ];
+                
+                activities.forEach(activity => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center';
+                    li.innerHTML = `
+                        <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-check text-xs text-green-600"></i>
+                        </div>
+                        <span class="text-gray-700">${activity}</span>
+                    `;
+                    activitiesList.appendChild(li);
+                });
+            } else if (id === '2') {
+                document.getElementById('milestoneTitle').textContent = 'Milestone 2: Number Recognition';
+                document.getElementById('milestoneDescription').textContent = 'Learn to recognize and write numbers 1-20 and understand the concept of counting.';
+                
+                // Set status for completed milestone
+                statusPanel.className = 'mb-4 p-3 rounded-lg bg-green-50';
+                statusPanel.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-check text-green-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-green-800">Completed</p>
+                            <p class="text-sm text-green-600">July 15, 2025</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Add activities
+                const activities = [
+                    'Counted objects from 1-20',
+                    'Recognized written numbers 1-20',
+                    'Matched numbers to quantities'
+                ];
+                
+                activities.forEach(activity => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center';
+                    li.innerHTML = `
+                        <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-check text-xs text-green-600"></i>
+                        </div>
+                        <span class="text-gray-700">${activity}</span>
+                    `;
+                    activitiesList.appendChild(li);
+                });
+            } else if (id === '3') {
+                document.getElementById('milestoneTitle').textContent = 'Milestone 3: Basic Shapes & Colors';
+                document.getElementById('milestoneDescription').textContent = 'Identify and name basic shapes and colors, and understand their properties.';
+                
+                // Set status for current milestone
+                statusPanel.className = 'mb-4 p-3 rounded-lg bg-purple-50';
+                statusPanel.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-hourglass-half text-purple-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-purple-800">In Progress</p>
+                            <p class="text-sm text-purple-600">Started July 16, 2025</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Add activities
+                const activities = [
+                    { text: 'Identified primary colors', done: true },
+                    { text: 'Recognized and named basic shapes', done: true },
+                    { text: 'Created patterns with shapes and colors', done: false }
+                ];
+                
+                activities.forEach(activity => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center';
+                    
+                    if (activity.done) {
+                        li.innerHTML = `
+                            <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                                <i class="fas fa-check text-xs text-green-600"></i>
+                            </div>
+                            <span class="text-gray-700">${activity.text}</span>
+                        `;
+                    } else {
+                        li.innerHTML = `
+                            <div class="w-5 h-5 bg-gray-100 rounded-full flex items-center justify-center mr-2">
+                                <i class="fas fa-circle text-xs text-gray-400"></i>
+                            </div>
+                            <span class="text-gray-700">${activity.text}</span>
+                        `;
+                    }
+                    
+                    activitiesList.appendChild(li);
+                });
+            } else {
+                // Locked milestones
+                document.getElementById('milestoneTitle').textContent = `Milestone ${id}: Coming Soon`;
+                document.getElementById('milestoneDescription').textContent = 'This milestone will be unlocked after completing the current challenges.';
+                
+                // Set status for locked milestone
+                statusPanel.className = 'mb-4 p-3 rounded-lg bg-gray-50';
+                statusPanel.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-lock text-gray-500"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800">Locked</p>
+                            <p class="text-sm text-gray-600">Complete previous milestones to unlock</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Add placeholder text
+                const li = document.createElement('li');
+                li.className = 'text-gray-500 italic';
+                li.textContent = 'Activities will be revealed when this milestone is unlocked.';
+                activitiesList.appendChild(li);
+            }
+            
+            detailsPanel.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

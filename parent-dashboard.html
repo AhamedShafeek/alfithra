@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Dashboard | KidTracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-purple-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="KidTracker Logo" class="h-8 w-auto">
+                    <span class="ml-2 font-semibold text-xl">KidTracker</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Rebecca Davis</span>
+                    <div class="h-8 w-8 rounded-full bg-purple-600 flex items-center justify-center">
+                        <span class="text-sm font-medium">RD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white shadow-md h-screen fixed">
+            <div class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="parent-dashboard.html" class="block p-3 bg-purple-100 text-purple-800 rounded-lg font-medium">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-feed.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-stream mr-2"></i> Daily Feed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-map.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-map-marked-alt mr-2"></i> Adventure Map
+                        </a>
+                    </li>
+                    <li>
+                        <a href="parent-messages.html" class="block p-3 text-gray-700 hover:bg-purple-50 rounded-lg font-medium">
+                            <i class="fas fa-comments mr-2"></i> Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 border-t mt-6">
+                <a href="index.html" class="block p-3 text-red-600 hover:bg-red-50 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="ml-64 p-8 flex-1">
+            <!-- Header with child info -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="md:flex">
+                    <div class="md:flex-shrink-0">
+                        <div class="h-48 w-full md:w-48 bg-gradient-to-br from-purple-400 to-indigo-500 flex items-center justify-center">
+                            <div class="w-32 h-32 rounded-full bg-white p-2">
+                                <div class="w-full h-full rounded-full bg-purple-100 flex items-center justify-center">
+                                    <span class="text-4xl font-bold text-purple-800">ED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h1 class="text-3xl font-bold text-gray-800 mb-2">Emma Davis</h1>
+                                <p class="text-gray-600">Pre-K (Age 5) - Sunshine Room</p>
+                                <p class="text-gray-600 mt-1">Teacher: Ms. Johnson</p>
+                            </div>
+                            <div class="bg-purple-50 p-3 rounded-lg text-center">
+                                <p class="text-sm text-purple-700">Current Level</p>
+                                <p class="text-2xl font-bold text-purple-800">3</p>
+                                <p class="text-xs text-purple-600">of 10 milestones</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex items-center">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-purple-600 h-2.5 rounded-full" style="width: 30%"></div>
+                            </div>
+                            <span class="ml-4 text-sm font-medium text-gray-600">30%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Today's Date -->
+            <div class="text-gray-600 mb-6" id="currentDate">July 20, 2025</div>
+            
+            <!-- Content Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Recent Wow Moment -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 bg-gradient-to-r from-pink-600 to-purple-600">
+                        <h2 class="text-xl font-bold text-white">Today's Wow Moment</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="bg-gray-100 rounded-lg overflow-hidden mb-4">
+                            <!-- Placeholder for photo -->
+                            <div class="h-48 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
+                                <i class="fas fa-image text-4xl text-gray-400"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Letter Recognition Achievement</h3>
+                        <p class="text-gray-600">Emma was able to recognize and write all 26 letters of the alphabet today! She's been practicing diligently and her hard work has paid off.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-sm text-gray-500">11:30 AM</span>
+                            <a href="parent-feed.html" class="text-purple-600 hover:text-purple-800 text-sm font-medium">
+                                View in Feed
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- At-Home Tasks -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600">
+                        <h2 class="text-xl font-bold text-white">At-Home Activities</h2>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 mr-3">
+                                    <i class="fas fa-check text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Letter Practice</h4>
+                                    <p class="text-sm text-gray-600">Help Emma practice writing the letters G, H, and I in her workbook.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mr-3">
+                                    <i class="fas fa-circle text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Number Counting</h4>
+                                    <p class="text-sm text-gray-600">Practice counting objects from 1-20 using household items.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mr-3">
+                                    <i class="fas fa-circle text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Zoo Field Trip Permission</h4>
+                                    <p class="text-sm text-gray-600">Please return the signed permission slip for next Wednesday's zoo trip.</p>
+                                    <div class="mt-1">
+                                        <a href="#" class="text-sm text-blue-600 hover:text-blue-800">Download Form</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Today's Schedule -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 bg-gradient-to-r from-amber-500 to-orange-500">
+                        <h2 class="text-xl font-bold text-white">Today's Schedule</h2>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <span class="text-sm font-medium text-gray-500 w-20">9:00 AM</span>
+                                <div class="flex-1 ml-4 p-2 bg-amber-50 rounded-lg">
+                                    <p class="font-medium text-amber-800">Morning Circle Time</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-sm font-medium text-gray-500 w-20">10:00 AM</span>
+                                <div class="flex-1 ml-4 p-2 bg-blue-50 rounded-lg">
+                                    <p class="font-medium text-blue-800">Alphabet Activities</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-sm font-medium text-gray-500 w-20">11:30 AM</span>
+                                <div class="flex-1 ml-4 p-2 bg-green-50 rounded-lg">
+                                    <p class="font-medium text-green-800">Outside Play</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-sm font-medium text-gray-500 w-20">12:15 PM</span>
+                                <div class="flex-1 ml-4 p-2 bg-purple-50 rounded-lg">
+                                    <p class="font-medium text-purple-800">Lunch Time</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-sm font-medium text-gray-500 w-20">1:00 PM</span>
+                                <div class="flex-1 ml-4 p-2 bg-indigo-50 rounded-lg">
+                                    <p class="font-medium text-indigo-800">Nap Time</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Upcoming Events -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 bg-gradient-to-r from-green-600 to-teal-600">
+                        <h2 class="text-xl font-bold text-white">Upcoming Events</h2>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded bg-green-100 flex items-center justify-center text-green-700 mr-3">
+                                    <span class="font-bold">22</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Field Trip to Zoo</h4>
+                                    <p class="text-sm text-gray-600">Wednesday, July 22, 2025 • 9:30 AM - 2:00 PM</p>
+                                    <p class="text-sm text-gray-500 mt-1">Remember to pack lunch and a water bottle.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded bg-purple-100 flex items-center justify-center text-purple-700 mr-3">
+                                    <span class="font-bold">24</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Parent-Teacher Conference</h4>
+                                    <p class="text-sm text-gray-600">Friday, July 24, 2025 • 4:15 PM - 4:45 PM</p>
+                                    <div class="mt-1 flex space-x-2">
+                                        <button class="text-xs bg-purple-100 text-purple-700 py-1 px-2 rounded">
+                                            Confirm
+                                        </button>
+                                        <button class="text-xs bg-gray-100 text-gray-700 py-1 px-2 rounded">
+                                            Reschedule
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Set current date
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>

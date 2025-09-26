@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Roster | Teacher | KidTracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <nav class="bg-blue-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="KidTracker Logo" class="h-8 w-auto">
+                    <span class="ml-2 font-semibold text-xl">KidTracker</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Ms. Johnson</span>
+                    <div class="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <span class="text-sm font-medium">MJ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white shadow-md h-screen fixed">
+            <div class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="teacher-dashboard.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-feed.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-stream mr-2"></i> Daily Feed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-roster.html" class="block p-3 bg-blue-100 text-blue-800 rounded-lg font-medium">
+                            <i class="fas fa-users mr-2"></i> Class Roster
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-map.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-map-marked-alt mr-2"></i> Adventure Map
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-messages.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-comments mr-2"></i> Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 border-t mt-6">
+                <a href="index.html" class="block p-3 text-red-600 hover:bg-red-50 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="ml-64 p-8 flex-1">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Class Roster</h1>
+                    <p class="text-gray-600" id="currentDate">July 20, 2025</p>
+                    <p class="text-sm text-blue-600 mt-1">
+                        <i class="fas fa-clock mr-1"></i> Current time: <span id="currentTime">14:30:52</span>
+                    </p>
+                </div>
+                <div class="flex space-x-3">
+                    <button id="takeAttendanceBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200 shadow-sm">
+                        <i class="fas fa-clipboard-check mr-2"></i> Take Attendance
+                    </button>
+                    <button id="sendAllMessagesBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-200 shadow-sm hidden">
+                        <i class="fas fa-paper-plane mr-2"></i> Send All Messages
+                    </button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 shadow-sm">
+                        <i class="fas fa-print mr-2"></i> Print
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Attendance Summary -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">Today's Attendance</h2>
+                        <p class="text-gray-600 mt-1">Last updated: <span id="lastUpdated">10:05 AM</span></p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center flex-wrap gap-4">
+                        <div class="flex items-center mr-6">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">Present: <span id="presentCount">14</span></span>
+                        </div>
+                        <div class="flex items-center mr-6">
+                            <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">Absent: <span id="absentCount">2</span></span>
+                        </div>
+                        <div class="flex items-center mr-6">
+                            <div class="w-3 h-3 bg-gray-300 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">Not Marked: <span id="notMarkedCount">0</span></span>
+                        </div>
+                        <div class="flex items-center mr-6">
+                            <div class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">On Time: <span id="onTimeCount">13</span></span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-amber-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">Late: <span id="lateCount">1</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Attendance Progress Bar -->
+                <div class="mt-4">
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                        <div class="bg-green-500 h-2.5 rounded-full" style="width: 87.5%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>0 students</span>
+                        <span>16 students</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Attendance Mode Notification -->
+            <div id="attendanceMode" class="hidden mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-0.5">
+                        <i class="fas fa-info-circle text-blue-600"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-blue-800 font-medium">Attendance Mode Active</h3>
+                        <div class="mt-1 text-sm text-blue-700">
+                            <p>Mark students as present or absent using the buttons below each student card.</p>
+                            <p class="mt-1"><strong>Note:</strong> Students marked present before 9:30 AM will receive a "Great job being on time!" message. Those marked present after 9:30 AM will receive a "Please try to arrive before 9:30 AM" reminder.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notification Area -->
+            <div id="notificationArea" class="hidden mb-6 p-4 rounded-lg border">
+                <!-- Will be filled dynamically when messages are sent -->
+            </div>
+            
+            <!-- Student Filter Controls -->
+            <div class="mb-6 flex flex-wrap items-center gap-3">
+                <div class="font-medium text-gray-700">Filter by:</div>
+                <button class="filter-btn active px-3 py-1.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800" data-filter="all">
+                    All Students
+                </button>
+                <button class="filter-btn px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200" data-filter="present">
+                    Present
+                </button>
+                <button class="filter-btn px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200" data-filter="absent">
+                    Absent
+                </button>
+                <button class="filter-btn px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200" data-filter="on-time">
+                    On Time
+                </button>
+                <button class="filter-btn px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200" data-filter="late">
+                    Late
+                </button>
+                <button class="filter-btn px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200" data-filter="not-marked">
+                    Not Marked
+                </button>
+            </div>
+            
+            <!-- Student Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Student 1 -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden student-card" data-status="present" data-arrival-status="on-time" data-arrival-time="09:10">
+                    <div class="h-3 bg-green-500"></div>
+                    <div class="p-5">
+                        <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4">
+                            <!-- Placeholder for student photo -->
+                            <div class="w-full h-full bg-gradient-to-br from-blue-300 to-purple-300 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">SL</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-center text-gray-800">Sophia Lee</h3>
+                        <div class="flex justify-center mt-1 mb-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 py-1 px-2 rounded-full">Age 4</span>
+                        </div>
+                        
+                        <div class="mt-2 flex justify-center">
+                            <div class="text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 flex items-center">
+                                <i class="fas fa-clock mr-1"></i> Arrived: 9:10 AM
+                                <i class="fas fa-check-circle ml-1 text-emerald-600"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button class="attendance-btn present-btn px-3 py-1.5 bg-green-100 text-green-700 rounded-lg border border-green-200 hover:bg-green-200 font-medium transition-colors">
+                                <i class="fas fa-check mr-1"></i> Present
+                            </button>
+                            <button class="attendance-btn absent-btn px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:bg-red-100 hover:text-red-700 hover:border-red-200 font-medium transition-colors">
+                                <i class="fas fa-times mr-1"></i> Absent
+                            </button>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button class="message-sent-btn w-full px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg font-medium text-sm flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-1.5"></i> Message Sent
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Student 2 -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden student-card" data-status="present" data-arrival-status="on-time" data-arrival-time="09:15">
+                    <div class="h-3 bg-green-500"></div>
+                    <div class="p-5">
+                        <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4">
+                            <div class="w-full h-full bg-gradient-to-br from-green-300 to-blue-300 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">NC</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-center text-gray-800">Noah Chen</h3>
+                        <div class="flex justify-center mt-1 mb-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 py-1 px-2 rounded-full">Age 5</span>
+                        </div>
+                        
+                        <div class="mt-2 flex justify-center">
+                            <div class="text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 flex items-center">
+                                <i class="fas fa-clock mr-1"></i> Arrived: 9:15 AM
+                                <i class="fas fa-check-circle ml-1 text-emerald-600"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button class="attendance-btn present-btn px-3 py-1.5 bg-green-100 text-green-700 rounded-lg border border-green-200 hover:bg-green-200 font-medium transition-colors">
+                                <i class="fas fa-check mr-1"></i> Present
+                            </button>
+                            <button class="attendance-btn absent-btn px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:bg-red-100 hover:text-red-700 hover:border-red-200 font-medium transition-colors">
+                                <i class="fas fa-times mr-1"></i> Absent
+                            </button>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button class="message-sent-btn w-full px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg font-medium text-sm flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-1.5"></i> Message Sent
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Student 3 -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden student-card" data-status="present" data-arrival-status="on-time" data-arrival-time="09:25">
+                    <div class="h-3 bg-green-500"></div>
+                    <div class="p-5">
+                        <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4">
+                            <div class="w-full h-full bg-gradient-to-br from-purple-300 to-pink-300 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">OS</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-center text-gray-800">Olivia Singh</h3>
+                        <div class="flex justify-center mt-1 mb-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 py-1 px-2 rounded-full">Age 4</span>
+                        </div>
+                        
+                        <div class="mt-2 flex justify-center">
+                            <div class="text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 flex items-center">
+                                <i class="fas fa-clock mr-1"></i> Arrived: 9:25 AM
+                                <i class="fas fa-check-circle ml-1 text-emerald-600"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button class="attendance-btn present-btn px-3 py-1.5 bg-green-100 text-green-700 rounded-lg border border-green-200 hover:bg-green-200 font-medium transition-colors">
+                                <i class="fas fa-check mr-1"></i> Present
+                            </button>
+                            <button class="attendance-btn absent-btn px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:bg-red-100 hover:text-red-700 hover:border-red-200 font-medium transition-colors">
+                                <i class="fas fa-times mr-1"></i> Absent
+                            </button>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button class="message-sent-btn w-full px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg font-medium text-sm flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-1.5"></i> Message Sent
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Student 4 -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden student-card" data-status="absent" data-arrival-status="" data-arrival-time="">
+                    <div class="h-3 bg-red-500"></div>
+                    <div class="p-5">
+                        <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4">
+                            <div class="w-full h-full bg-gradient-to-br from-yellow-300 to-red-300 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">ED</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-center text-gray-800">Emma Davis</h3>
+                        <div class="flex justify-center mt-1 mb-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 py-1 px-2 rounded-full">Age 5</span>
+                        </div>
+                        
+                        <div class="mt-2 flex justify-center">
+                            <div class="text-xs px-2.5 py-1 rounded-full bg-red-100 text-red-800 flex items-center">
+                                <i class="fas fa-times-circle mr-1"></i> Absent Today
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button class="attendance-btn present-btn px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:bg-green-100 hover:text-green-700 hover:border-green-200 font-medium transition-colors">
+                                <i class="fas fa-check mr-1"></i> Present
+                            </button>
+                            <button class="attendance-btn absent-btn px-3 py-1.5 bg-red-100 text-red-700 rounded-lg border border-red-200 hover:bg-red-200 font-medium transition-colors">
+                                <i class="fas fa-times mr-1"></i> Absent
+                            </button>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button class="message-sent-btn w-full px-3 py-1.5 bg-gray-100 text-gray-500 rounded-lg font-medium text-sm flex items-center justify-center" disabled>
+                                <i class="fas fa-paper-plane mr-1.5"></i> No Message
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Student 5 (Example Late Student) -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden student-card" data-status="present" data-arrival-status="late" data-arrival-time="09:45">
+                    <div class="h-3 bg-green-500"></div>
+                    <div class="p-5">
+                        <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4">
+                            <div class="w-full h-full bg-gradient-to-br from-orange-300 to-amber-300 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">JW</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-center text-gray-800">Jackson Wright</h3>
+                        <div class="flex justify-center mt-1 mb-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 py-1 px-2 rounded-full">Age 5</span>
+                        </div>
+                        
+                        <div class="mt-2 flex justify-center">
+                            <div class="text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 flex items-center">
+                                <i class="fas fa-clock mr-1"></i> Arrived: 9:45 AM
+                                <i class="fas fa-exclamation-circle ml-1 text-amber-600"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button class="attendance-btn present-btn px-3 py-1.5 bg-green-100 text-green-700 rounded-lg border border-green-200 hover:bg-green-200 font-medium transition-colors">
+                                <i class="fas fa-check mr-1"></i> Present
+                            </button>
+                            <button class="attendance-btn absent-btn px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:bg-red-100 hover:text-red-700 hover:border-red-200 font-medium transition-colors">
+                                <i class="fas fa-times mr-1"></i> Absent
+                            </button>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button class="message-sent-btn w-full px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg font-medium text-sm flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-1.5"></i> Message Sent
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Student 6 (Not Marked Yet) -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden student-card" data-status="not-marked" data-arrival-status="" data-arrival-time="">
+                    <div class="h-3 bg-gray-300"></div>
+                    <div class="p-5">
+                        <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4">
+                            <div class="w-full h-full bg-gradient-to-br from-indigo-300 to-blue-300 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">AK</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-center text-gray-800">Aiden Kim</h3>
+                        <div class="flex justify-center mt-1 mb-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 py-1 px-2 rounded-full">Age 4</span>
+                        </div>
+                        
+                        <div class="mt-2 flex justify-center">
+                            <div class="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 flex items-center">
+                                <i class="fas fa-question-circle mr-1"></i> Not Marked Yet
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button class="attendance-btn present-btn px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:bg-green-100 hover:text-green-700 hover:border-green-200 font-medium transition-colors">
+                                <i class="fas fa-check mr-1"></i> Present
+                            </button>
+                            <button class="attendance-btn absent-btn px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:bg-red-100 hover:text-red-700 hover:border-red-200 font-medium transition-colors">
+                                <i class="fas fa-times mr-1"></i> Absent
+                            </button>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button class="send-message-btn w-full px-3 py-1.5 bg-gray-100 text-gray-500 rounded-lg font-medium text-sm flex items-center justify-center" disabled>
+                                <i class="fas fa-paper-plane mr-1.5"></i> No Message
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More students would be added here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Attendance Modal -->
+    <div id="arrivalTimeModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-md mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Record Arrival Time</h2>
+                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-gray-700">You've marked <span id="studentName" class="font-medium">Student Name</span> as present. Please confirm their arrival time:</p>
+                
+                <div class="mt-4">
+                    <label for="arrivalTime" class="block text-sm font-medium text-gray-700 mb-1">Arrival Time</label>
+                    <input type="time" id="arrivalTime" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" value="09:30">
+                    <p class="text-sm text-gray-500 mt-1">School starts at 9:30 AM.</p>
+                </div>
+                
+                <div id="messagePreview" class="mt-4 p-3 rounded-lg bg-blue-50 text-blue-800">
+                    <p class="font-medium">Message to parent:</p>
+                    <p id="messageText" class="text-sm mt-1"></p>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="cancelArrivalBtn" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                    Cancel
+                </button>
+                <button id="confirmArrivalBtn" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
+                    Confirm & Send Message
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current date and time
+        const today = new Date('2025-07-20T14:30:52');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+        document.getElementById('currentTime').textContent = today.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false});
+        
+        // School start time (9:30 AM)
+        const schoolStartTime = new Date(today);
+        schoolStartTime.setHours(9, 30, 0);
+        
+        // Handle attendance taking
+        const takeAttendanceBtn = document.getElementById('takeAttendanceBtn');
+        const attendanceMode = document.getElementById('attendanceMode');
+        const studentCards = document.querySelectorAll('.student-card');
+        const sendAllMessagesBtn = document.getElementById('sendAllMessagesBtn');
+        
+        takeAttendanceBtn.addEventListener('click', function() {
+            attendanceMode.classList.toggle('hidden');
+            
+            if (!attendanceMode.classList.contains('hidden')) {
+                takeAttendanceBtn.textContent = 'Save Attendance';
+                takeAttendanceBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                takeAttendanceBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                sendAllMessagesBtn.classList.remove('hidden');
+            } else {
+                takeAttendanceBtn.innerHTML = '<i class="fas fa-clipboard-check mr-2"></i> Take Attendance';
+                takeAttendanceBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                takeAttendanceBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                sendAllMessagesBtn.classList.add('hidden');
+                
+                // Update last updated time
+                const now = new Date();
+                document.getElementById('lastUpdated').textContent = 
+                    now.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'});
+                
+                // Count present/absent
+                updateAttendanceCounts();
+            }
+        });
+        
+        // Arrival Time Modal Elements
+        const arrivalTimeModal = document.getElementById('arrivalTimeModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const studentNameEl = document.getElementById('studentName');
+        const arrivalTimeInput = document.getElementById('arrivalTime');
+        const messageTextEl = document.getElementById('messageText');
+        const confirmArrivalBtn = document.getElementById('confirmArrivalBtn');
+        const cancelArrivalBtn = document.getElementById('cancelArrivalBtn');
+        
+        let currentStudentCard = null;
+        
+        // Handle clicking on attendance buttons
+        document.querySelectorAll('.attendance-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.student-card');
+                
+                if (this.classList.contains('present-btn')) {
+                    // Set the student card as the current one
+                    currentStudentCard = card;
+                    
+                    // Get the student's name
+                    const studentName = card.querySelector('h3').textContent;
+                    studentNameEl.textContent = studentName;
+                    
+                    // Show the arrival time modal
+                    arrivalTimeInput.value = '09:30';
+                    updateMessagePreview('09:30');
+                    arrivalTimeModal.classList.remove('hidden');
+                } else {
+                    // Mark student as absent
+                    card.setAttribute('data-status', 'absent');
+                    card.setAttribute('data-arrival-status', '');
+                    card.setAttribute('data-arrival-time', '');
+                    
+                    // Update UI
+                    card.querySelector('.h-3').className = 'h-3 bg-red-500';
+                    card.querySelector('.absent-btn').classList.add('bg-red-100', 'text-red-700', 'border-red-200');
+                    card.querySelector('.absent-btn').classList.remove('bg-gray-100', 'text-gray-700', 'border-gray-200');
+                    card.querySelector('.present-btn').classList.add('bg-gray-100', 'text-gray-700', 'border-gray-200');
+                    card.querySelector('.present-btn').classList.remove('bg-green-100', 'text-green-700', 'border-green-200');
+                    
+                    // Update status display
+                    const statusDisplay = card.querySelector('.mt-2 .flex.justify-center div');
+                    statusDisplay.className = 'text-xs px-2.5 py-1 rounded-full bg-red-100 text-red-800 flex items-center';
+                    statusDisplay.innerHTML = '<i class="fas fa-times-circle mr-1"></i> Absent Today';
+                    
+                    // Update message button
+                    const messageBtn = card.querySelector('.mt-3 button');
+                    messageBtn.className = 'message-sent-btn w-full px-3 py-1.5 bg-gray-100 text-gray-500 rounded-lg font-medium text-sm flex items-center justify-center';
+                    messageBtn.disabled = true;
+                    messageBtn.innerHTML = '<i class="fas fa-paper-plane mr-1.5"></i> No Message';
+                    
+                    updateAttendanceCounts();
+                }
+            });
+        });
+        
+        // Handle arrival time input change
+        arrivalTimeInput.addEventListener('input', function() {
+            updateMessagePreview(this.value);
+        });
+        
+        // Update message preview based on arrival time
+        function updateMessagePreview(timeString) {
+            const [hours, minutes] = timeString.split(':').map(Number);
+            const arrivalTime = new Date(today);
+            arrivalTime.setHours(hours, minutes, 0);
+            
+            const isOnTime = arrivalTime <= schoolStartTime;
+            
+            if (isOnTime) {
+                messageTextEl.textContent = "Great job being on time today! Your child arrived at " + formatTime(arrivalTime) + " and is having a wonderful day of learning.";
+                messageTextEl.className = 'text-sm mt-1 text-emerald-700';
+            } else {
+                messageTextEl.textContent = "Your child arrived at " + formatTime(arrivalTime) + " today. Please remember that school starts at 9:30 AM. Thank you for your cooperation.";
+                messageTextEl.className = 'text-sm mt-1 text-amber-700';
+            }
+        }
+        
+        // Format time as 12-hour
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'});
+        }
+        
+        // Handle confirm arrival button
+        confirmArrivalBtn.addEventListener('click', function() {
+            if (!currentStudentCard) return;
+            
+            const timeString = arrivalTimeInput.value;
+            const [hours, minutes] = timeString.split(':').map(Number);
+            const arrivalTime = new Date(today);
+            arrivalTime.setHours(hours, minutes, 0);
+            
+            const isOnTime = arrivalTime <= schoolStartTime;
+            const formattedTime = formatTime(arrivalTime);
+            
+            // Update student card data attributes
+            currentStudentCard.setAttribute('data-status', 'present');
+            currentStudentCard.setAttribute('data-arrival-status', isOnTime ? 'on-time' : 'late');
+            currentStudentCard.setAttribute('data-arrival-time', timeString);
+            
+            // Update UI
+            currentStudentCard.querySelector('.h-3').className = 'h-3 bg-green-500';
+            currentStudentCard.querySelector('.present-btn').classList.add('bg-green-100', 'text-green-700', 'border-green-200');
+            currentStudentCard.querySelector('.present-btn').classList.remove('bg-gray-100', 'text-gray-700', 'border-gray-200');
+            currentStudentCard.querySelector('.absent-btn').classList.add('bg-gray-100', 'text-gray-700', 'border-gray-200');
+            currentStudentCard.querySelector('.absent-btn').classList.remove('bg-red-100', 'text-red-700', 'border-red-200');
+            
+            // Update status display
+            const statusDisplay = currentStudentCard.querySelector('.mt-2 .flex.justify-center div');
+            if (isOnTime) {
+                statusDisplay.className = 'text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 flex items-center';
+                statusDisplay.innerHTML = `<i class="fas fa-clock mr-1"></i> Arrived: ${formattedTime}<i class="fas fa-check-circle ml-1 text-emerald-600"></i>`;
+            } else {
+                statusDisplay.className = 'text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 flex items-center';
+                statusDisplay.innerHTML = `<i class="fas fa-clock mr-1"></i> Arrived: ${formattedTime}<i class="fas fa-exclamation-circle ml-1 text-amber-600"></i>`;
+            }
+            
+            // Update message button
+            const messageBtn = currentStudentCard.querySelector('.mt-3 button');
+            messageBtn.className = 'message-sent-btn w-full px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg font-medium text-sm flex items-center justify-center';
+            messageBtn.disabled = false;
+            messageBtn.innerHTML = '<i class="fas fa-paper-plane mr-1.5"></i> Message Sent';
+            
+            // Show notification
+            showNotification(isOnTime);
+            
+            // Close modal
+            arrivalTimeModal.classList.add('hidden');
+            currentStudentCard = null;
+            
+            // Update counts
+            updateAttendanceCounts();
+        });
+        
+        // Close modal buttons
+        closeModalBtn.addEventListener('click', function() {
+            arrivalTimeModal.classList.add('hidden');
+            currentStudentCard = null;
+        });
+        
+        cancelArrivalBtn.addEventListener('click', function() {
+            arrivalTimeModal.classList.add('hidden');
+            currentStudentCard = null;
+        });
+        
+        // Show notification after sending a message
+        function showNotification(isOnTime) {
+            const notificationArea = document.getElementById('notificationArea');
+            
+            // Create notification if it doesn't exist
+            if (notificationArea.classList.contains('hidden')) {
+                notificationArea.classList.remove('hidden');
+                
+                if (isOnTime) {
+                    notificationArea.className = 'mb-6 p-4 rounded-lg border border-emerald-200 bg-emerald-50';
+                    notificationArea.innerHTML = `
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-emerald-600 mt-0.5"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-emerald-800 font-medium">Attendance Messages</h3>
+                                <div class="mt-1 text-sm text-emerald-700">
+                                    <p><span id="onTimeMessageCount">1</span> on-time appreciation messages sent to parents.</p>
+                                    <p><span id="lateMessageCount">0</span> late reminder messages sent to parents.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    notificationArea.className = 'mb-6 p-4 rounded-lg border border-amber-200 bg-amber-50';
+                    notificationArea.innerHTML = `
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-paper-plane text-amber-600 mt-0.5"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-amber-800 font-medium">Attendance Messages</h3>
+                                <div class="mt-1 text-sm text-amber-700">
+                                    <p><span id="onTimeMessageCount">0</span> on-time appreciation messages sent to parents.</p>
+                                    <p><span id="lateMessageCount">1</span> late reminder messages sent to parents.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                // Update existing notification
+                const onTimeCount = document.getElementById('onTimeMessageCount');
+                const lateCount = document.getElementById('lateMessageCount');
+                
+                if (isOnTime) {
+                    onTimeCount.textContent = parseInt(onTimeCount.textContent) + 1;
+                } else {
+                    lateCount.textContent = parseInt(lateCount.textContent) + 1;
+                }
+                
+                // Update notification style based on which type has more
+                if (parseInt(onTimeCount.textContent) >= parseInt(lateCount.textContent)) {
+                    notificationArea.className = 'mb-6 p-4 rounded-lg border border-emerald-200 bg-emerald-50';
+                    notificationArea.querySelector('.fas').className = 'fas fa-check-circle text-emerald-600 mt-0.5';
+                    notificationArea.querySelector('h3').className = 'text-emerald-800 font-medium';
+                } else {
+                    notificationArea.className = 'mb-6 p-4 rounded-lg border border-amber-200 bg-amber-50';
+                    notificationArea.querySelector('.fas').className = 'fas fa-paper-plane text-amber-600 mt-0.5';
+                    notificationArea.querySelector('h3').className = 'text-amber-800 font-medium';
+                }
+            }
+        }
+        
+        // Send all pending messages button
+        sendAllMessagesBtn.addEventListener('click', function() {
+            // Find all unmarked students
+            const unmarkedStudents = document.querySelectorAll('.student-card[data-status="not-marked"]');
+            
+            if (unmarkedStudents.length === 0) {
+                alert('All students have been marked already!');
+                return;
+            }
+            
+            // Confirm with the user
+            if (confirm(`Mark the remaining ${unmarkedStudents.length} students as absent?`)) {
+                unmarkedStudents.forEach(card => {
+                    // Mark as absent
+                    card.setAttribute('data-status', 'absent');
+                    card.setAttribute('data-arrival-status', '');
+                    card.setAttribute('data-arrival-time', '');
+                    
+                    // Update UI
+                    card.querySelector('.h-3').className = 'h-3 bg-red-500';
+                    card.querySelector('.absent-btn').classList.add('bg-red-100', 'text-red-700', 'border-red-200');
+                    card.querySelector('.absent-btn').classList.remove('bg-gray-100', 'text-gray-700', 'border-gray-200');
+                    card.querySelector('.present-btn').classList.add('bg-gray-100', 'text-gray-700', 'border-gray-200');
+                    card.querySelector('.present-btn').classList.remove('bg-green-100', 'text-green-700', 'border-green-200');
+                    
+                    // Update status display
+                    const statusDisplay = card.querySelector('.mt-2 .flex.justify-center div');
+                    statusDisplay.className = 'text-xs px-2.5 py-1 rounded-full bg-red-100 text-red-800 flex items-center';
+                    statusDisplay.innerHTML = '<i class="fas fa-times-circle mr-1"></i> Absent Today';
+                    
+                    // Update message button
+                    const messageBtn = card.querySelector('.mt-3 button');
+                    messageBtn.className = 'message-sent-btn w-full px-3 py-1.5 bg-gray-100 text-gray-500 rounded-lg font-medium text-sm flex items-center justify-center';
+                    messageBtn.disabled = true;
+                    messageBtn.innerHTML = '<i class="fas fa-paper-plane mr-1.5"></i> No Message';
+                });
+                
+                // Exit attendance mode
+                attendanceMode.classList.add('hidden');
+                takeAttendanceBtn.innerHTML = '<i class="fas fa-clipboard-check mr-2"></i> Take Attendance';
+                takeAttendanceBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                takeAttendanceBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                sendAllMessagesBtn.classList.add('hidden');
+                
+                // Update last updated time
+                const now = new Date();
+                document.getElementById('lastUpdated').textContent = 
+                    now.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'});
+                
+                // Update counts
+                updateAttendanceCounts();
+            }
+        });
+        
+        // Filter students
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active', 'bg-blue-100', 'text-blue-800');
+                    btn.classList.add('bg-gray-100', 'text-gray-800', 'hover:bg-gray-200');
+                });
+                
+                this.classList.add('active', 'bg-blue-100', 'text-blue-800');
+                this.classList.remove('bg-gray-100', 'text-gray-800', 'hover:bg-gray-200');
+                
+                // Get filter value
+                const filter = this.getAttribute('data-filter');
+                
+                // Apply filter
+                studentCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.classList.remove('hidden');
+                    } else if (filter === 'on-time') {
+                        card.classList.toggle('hidden', card.getAttribute('data-arrival-status') !== 'on-time');
+                    } else if (filter === 'late') {
+                        card.classList.toggle('hidden', card.getAttribute('data-arrival-status') !== 'late');
+                    } else if (filter === 'not-marked') {
+                        card.classList.toggle('hidden', card.getAttribute('data-status') !== 'not-marked');
+                    } else {
+                        card.classList.toggle('hidden', card.getAttribute('data-status') !== filter);
+                    }
+                });
+            });
+        });
+        
+        function updateAttendanceCounts() {
+            const present = document.querySelectorAll('.student-card[data-status="present"]').length;
+            const absent = document.querySelectorAll('.student-card[data-status="absent"]').length;
+            const notMarked = studentCards.length - present - absent;
+            const onTime = document.querySelectorAll('.student-card[data-arrival-status="on-time"]').length;
+            const late = document.querySelectorAll('.student-card[data-arrival-status="late"]').length;
+            
+            document.getElementById('presentCount').textContent = present;
+            document.getElementById('absentCount').textContent = absent;
+            document.getElementById('notMarkedCount').textContent = notMarked;
+            document.getElementById('onTimeCount').textContent = onTime;
+            document.getElementById('lateCount').textContent = late;
+        }
+        
+        // Initialize counts
+        updateAttendanceCounts();
+    </script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Feed | Teacher | KidTracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="KidTracker Logo" class="h-8 w-auto">
+                    <span class="ml-2 font-semibold text-xl">KidTracker</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Ms. Johnson</span>
+                    <div class="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <span class="text-sm font-medium">MJ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white shadow-md h-screen fixed">
+            <div class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="teacher-dashboard.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-feed.html" class="block p-3 bg-blue-100 text-blue-800 rounded-lg font-medium">
+                            <i class="fas fa-stream mr-2"></i> Daily Feed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-roster.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-users mr-2"></i> Class Roster
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-map.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-map-marked-alt mr-2"></i> Adventure Map
+                        </a>
+                    </li>
+                    <li>
+                        <a href="teacher-messages.html" class="block p-3 text-gray-700 hover:bg-blue-50 rounded-lg font-medium">
+                            <i class="fas fa-comments mr-2"></i> Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 border-t mt-6">
+                <a href="index.html" class="block p-3 text-red-600 hover:bg-red-50 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="ml-64 p-8 flex-1">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Daily Feed</h1>
+                    <p class="text-gray-600" id="currentDate">July 20, 2025</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                        <i class="fas fa-filter mr-2"></i> Filter
+                    </button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                        <i class="fas fa-calendar-alt mr-2"></i> Date
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Create Post Form -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Create Post</h2>
+                <form id="postForm">
+                    <div class="mb-4">
+                        <label for="postType" class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                        <select id="postType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <option value="activity">Activity</option>
+                            <option value="meal">Meal</option>
+                            <option value="nap">Nap</option>
+                            <option value="achievement">Achievement</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="postContent" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <textarea id="postContent" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="What happened today?"></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tag Students</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="student1" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="student1" class="ml-2 text-sm text-gray-700">Sophia Lee</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="student2" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="student2" class="ml-2 text-sm text-gray-700">Noah Chen</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="student3" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="student3" class="ml-2 text-sm text-gray-700">Olivia Singh</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="student4" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="student4" class="ml-2 text-sm text-gray-700">Ethan Park</label>
+                            </div>
+                        </div>
+                        <button type="button" class="mt-2 text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            <i class="fas fa-user-check mr-1"></i> Select All
+                        </button>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                            <i class="fas fa-camera mr-2"></i> Add Photo
+                        </button>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
+                            Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Feed Entries -->
+            <div class="space-y-6">
+                <!-- Entry 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-blue-50 px-6 py-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="assets/icons/meal.svg" alt="Meal icon" class="h-10 w-10 mr-3">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">Lunch Time</h3>
+                                    <p class="text-gray-600 text-sm">2:05 PM</p>
+                                </div>
+                            </div>
+                            <div class="text-xs bg-blue-100 text-blue-800 py-1 px-3 rounded-full">
+                                Whole Class
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700">Today we had vegetable soup, grilled cheese sandwiches, and apple slices. Most students ate well, especially enjoying the grilled cheese!</p>
+                    </div>
+                    <div class="px-6 py-3 bg-gray-50 flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Posted by Ms. Johnson</span>
+                        <div>
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Entry 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-purple-50 px-6 py-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="assets/icons/star-badge.svg" alt="Achievement icon" class="h-10 w-10 mr-3">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">Letter Recognition Achievement</h3>
+                                    <p class="text-gray-600 text-sm">11:30 AM</p>
+                                </div>
+                            </div>
+                            <div class="text-xs bg-purple-100 text-purple-800 py-1 px-3 rounded-full">
+                                2 Students
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700">Emma and Lucas were able to recognize and write all 26 letters of the alphabet today! They've been practicing diligently and their hard work has paid off.</p>
+                        <div class="mt-4 flex gap-2">
+                            <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                Emma Davis
+                            </div>
+                            <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                Lucas Wright
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-3 bg-gray-50 flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Posted by Ms. Johnson</span>
+                        <div>
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Entry 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-amber-50 px-6 py-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="assets/icons/moon.svg" alt="Nap icon" class="h-10 w-10 mr-3">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">Nap Time</h3>
+                                    <p class="text-gray-600 text-sm">1:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="text-xs bg-amber-100 text-amber-800 py-1 px-3 rounded-full">
+                                Whole Class
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700">Today's nap time lasted for 45 minutes. Most children slept well, though a few were restless.</p>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600"><span class="font-medium">Didn't sleep:</span> Sofia, Jackson</p>
+                        </div>
+                    </div>
+                    <div class="px-6 py-3 bg-gray-50 flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Posted by Ms. Johnson</span>
+                        <div>
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Set current date
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+        
+        // Handle post form submission
+        document.getElementById('postForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const postType = document.getElementById('postType').value;
+            const postContent = document.getElementById('postContent').value;
+            
+            // This would normally save the data to a server
+            alert('Post created successfully!');
+            
+            // Clear the form
+            document.getElementById('postContent').value = '';
+            
+            // In a real application, you would add the new post to the feed dynamically
+        });
+    </script>
+</body>
+</html>
