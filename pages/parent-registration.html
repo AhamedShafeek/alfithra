@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Registration - Preschool Management System</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .registration-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .registration-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .registration-header h1 {
+            color: #4a6fa5;
+            margin-bottom: 10px;
+        }
+        
+        .registration-header p {
+            color: #7f8c8d;
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .form-section h3 {
+            color: #4a6fa5;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .login-link a {
+            color: #4a6fa5;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="registration-container">
+            <div class="registration-header">
+                <h1>Parent Registration</h1>
+                <p>Create your account to access your child's information</p>
+            </div>
+            
+            <div id="success-message" class="success-message" style="display: none;"></div>
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            
+            <form id="parent-registration-form">
+                <div class="form-section">
+                    <h3>Parent Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="parent-firstname">First Name</label>
+                            <input type="text" id="parent-firstname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-lastname">Last Name</label>
+                            <input type="text" id="parent-lastname" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="parent-email">Email Address</label>
+                        <input type="email" id="parent-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="parent-phone">Phone Number</label>
+                        <input type="tel" id="parent-phone" required>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Account Credentials</h3>
+                    <div class="form-group">
+                        <label for="parent-username">Username</label>
+                        <input type="text" id="parent-username" required>
+                        <small style="color: #7f8c8d;">Choose a unique username for login</small>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="parent-password">Password</label>
+                            <input type="password" id="parent-password" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-confirm-password">Confirm Password</label>
+                            <input type="password" id="parent-confirm-password" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Emergency Contact</h3>
+                    <div class="form-group">
+                        <label for="emergency-contact-name">Emergency Contact Name</label>
+                        <input type="text" id="emergency-contact-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emergency-contact-phone">Emergency Contact Phone</label>
+                        <input type="tel" id="emergency-contact-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emergency-contact-relation">Relationship</label>
+                        <select id="emergency-contact-relation" required>
+                            <option value="">Select Relationship</option>
+                            <option value="spouse">Spouse</option>
+                            <option value="parent">Parent</option>
+                            <option value="sibling">Sibling</option>
+                            <option value="friend">Friend</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="terms-agreement" required>
+                        I agree to the <a href="#" onclick="showTerms()">Terms and Conditions</a> and <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </div>
+            </form>
+            
+            <div class="login-link">
+                <p>Already have an account? <a href="../index.html">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="../js/firebase-config.js"></script>
+    <script type="module" src="../js/database.js"></script>
+    <script type="module" src="../js/parent-registration.js"></script>
+</body>
+</html>
+

@@ -3,74 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KidTracker - Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-image: url('assets/images/login-background.png');
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
+    <title>Preschool Management System - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="min-h-screen flex items-center justify-center bg-blue-50 p-4">
-    <div class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
-        <div class="bg-gradient-to-r from-blue-500 to-purple-600 py-6 px-8">
-            <img src="assets/images/logo.svg" alt="KidTracker Logo" class="h-16 mx-auto">
-        </div>
-        
-        <div class="p-8">
-            <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">Welcome Back!</h1>
-            
-            <form id="loginForm" class="space-y-6">
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email or Username</label>
-                    <input type="text" id="email" name="email" required 
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="logo">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">
+                    <i class="fas fa-graduation-cap" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
                 </div>
+                <h1>Preschool Management</h1>
+                <p style="color: var(--gray-500); margin-top: 0.5rem; font-size: var(--font-size-sm);">Smart Solutions for Early Education</p>
+            </div>
+            <div class="login-form">
+                <h2>Welcome Back</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user" style="margin-right: 0.5rem;"></i>
+                            Username
+                        </label>
+                        <input type="text" id="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock" style="margin-right: 0.5rem;"></i>
+                            Password
+                        </label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-full btn-lg">
+                            <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>
+                            Sign In
+                        </button>
+                    </div>
+                    <div id="error-message" class="error-message"></div>
+                </form>
                 
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="password" name="password" required 
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                <div style="text-align: center; margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--gray-200);">
+                    <p style="color: var(--gray-500); font-size: var(--font-size-sm);">
+                        New parent? 
+                        <a href="pages/parent-registration.html" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                            Create an account
+                        </a>
+                    </p>
                 </div>
-                
-                <div id="errorMessage" class="hidden text-red-600 text-sm font-medium p-2 bg-red-50 rounded-lg"></div>
-                
-                <button type="submit" 
-                    class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
-                    Sign In
-                </button>
-            </form>
-            
-            <div class="mt-6 text-center">
-                <a href="forgot-password.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                    Forgot your password?
-                </a>
             </div>
         </div>
     </div>
 
-    <script type="module">
-        import { loginUser } from './auth.js';
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-            
-            // Basic validation
-            if (!email || !password) {
-                errorMessage.textContent = 'Please enter both email and password';
-                errorMessage.classList.remove('hidden');
-                return;
-            }
-            
-            errorMessage.classList.add('hidden');
-            loginUser(email, password);
-        });
-    </script>
+    <!-- Firebase SDK -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>

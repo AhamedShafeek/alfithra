@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Preschool Management System</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+                    <i class="fas fa-graduation-cap" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+                </div>
+                <h2>Preschool Management</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+                <li><a href="students.html"><i class="fas fa-users"></i>Students</a></li>
+                <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i>Attendance</a></li>
+                <li><a href="activities.html"><i class="fas fa-puzzle-piece"></i>Activities</a></li>
+                <li><a href="messages.html" class="active"><i class="fas fa-envelope"></i>Messages</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-bar"></i>Reports</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i>Settings</a></li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <div class="user-info">
+                    <button class="btn btn-secondary" id="mobile-menu-toggle" style="display: none; margin-right: 1rem;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h3><i class="fas fa-envelope" style="margin-right: 0.5rem; color: var(--primary-color);"></i>Messages</h3>
+                </div>
+                <button class="btn-logout">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 0.5rem;"></i>Logout
+                </button>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="compose-message-btn">
+                    <i class="fas fa-edit" style="margin-right: 0.5rem;"></i>Compose Message
+                </button>
+                <button class="btn btn-primary" id="mark-all-read-btn">
+                    <i class="fas fa-check-double" style="margin-right: 0.5rem;"></i>Mark All Read
+                </button>
+                <button class="btn btn-primary" id="refresh-messages-btn">
+                    <i class="fas fa-sync-alt" style="margin-right: 0.5rem;"></i>Refresh
+                </button>
+            </div>
+            
+            <!-- Message Summary -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--error-color);">
+                        <i class="fas fa-envelope-open"></i>
+                    </div>
+                    <h3>Unread Messages</h3>
+                    <div class="number" id="unread-count">0</div>
+                    <div class="subtitle">Require Attention</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);">
+                        <i class="fas fa-inbox"></i>
+                    </div>
+                    <h3>Total Messages</h3>
+                    <div class="number" id="total-count">0</div>
+                    <div class="subtitle">All Messages</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Sent Today</h3>
+                    <div class="number" id="sent-today">0</div>
+                    <div style="font-size: 12px; color: #7f8c8d;">Messages Sent</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Received Today</h3>
+                    <div class="number" id="received-today">0</div>
+                    <div style="font-size: 12px; color: #7f8c8d;">Messages Received</div>
+                </div>
+            </div>
+            
+            <!-- Message Filters -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Message Filters</h2>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="message-status-filter">Status</label>
+                        <select id="message-status-filter">
+                            <option value="">All Messages</option>
+                            <option value="unread">Unread Only</option>
+                            <option value="read">Read Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-sender-filter">Sender</label>
+                        <select id="message-sender-filter">
+                            <option value="">All Senders</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-priority-filter">Priority</label>
+                        <select id="message-priority-filter">
+                            <option value="">All Priorities</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="high">High</option>
+                            <option value="normal">Normal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Messages List -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Messages</h2>
+                </div>
+                <div id="messages-list">
+                    <!-- Messages will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Message Detail Modal -->
+    <div class="modal" id="message-detail-modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-modal">&times;</span>
+            <div id="message-detail-content">
+                <!-- Message details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-items">
+            <a href="admin-dashboard.html" class="bottom-nav-item">
+                <i class="fas fa-tachometer-alt bottom-nav-icon"></i>
+                <span class="bottom-nav-label">Dashboard</span>
+            </a>
+            <a href="students.html" class="bottom-nav-item">
+                <i class="fas fa-users bottom-nav-icon"></i>
+                <span class="bottom-nav-label">Students</span>
+            </a>
+            <a href="attendance.html" class="bottom-nav-item">
+                <i class="fas fa-clipboard-check bottom-nav-icon"></i>
+                <span class="bottom-nav-label">Attendance</span>
+            </a>
+            <a href="activities.html" class="bottom-nav-item">
+                <i class="fas fa-puzzle-piece bottom-nav-icon"></i>
+                <span class="bottom-nav-label">Activities</span>
+            </a>
+            <a href="messages.html" class="bottom-nav-item active">
+                <i class="fas fa-envelope bottom-nav-icon"></i>
+                <span class="bottom-nav-label">Messages</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="../js/firebase-config.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/database.js"></script>
+    <script type="module" src="../js/messages.js"></script>
+</body>
+</html>
+

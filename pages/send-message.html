@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message - Preschool Management System</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .message-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .message-header h1 {
+            color: #4a6fa5;
+            margin-bottom: 10px;
+        }
+        
+        .message-header p {
+            color: #7f8c8d;
+        }
+        
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .recipient-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .recipient-info h4 {
+            margin: 0 0 10px 0;
+            color: #4a6fa5;
+        }
+        
+        .recipient-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+        
+        .success-message, .error-message {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .back-button {
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .character-count {
+            text-align: right;
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .character-count.warning {
+            color: #f39c12;
+        }
+        
+        .character-count.error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-button" onclick="goBack()">← Back</button>
+        
+        <div class="message-container">
+            <div class="message-header">
+                <h1>Send Message</h1>
+                <p>Communicate with parents or teachers</p>
+            </div>
+            
+            <div id="success-message" class="success-message" style="display: none;"></div>
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            
+            <form id="send-message-form">
+                <div class="form-group">
+                    <label for="message-recipient">To</label>
+                    <select id="message-recipient" required>
+                        <option value="">Select recipient...</option>
+                    </select>
+                </div>
+                
+                <div id="recipient-info" class="recipient-info" style="display: none;">
+                    <h4 id="recipient-name">-</h4>
+                    <p id="recipient-role">-</p>
+                    <p id="recipient-details">-</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message-subject">Subject</label>
+                    <input type="text" id="message-subject" required maxlength="100">
+                    <div class="character-count" id="subject-count">0/100</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message-content">Message</label>
+                    <textarea id="message-content" required maxlength="1000" placeholder="Type your message here..."></textarea>
+                    <div class="character-count" id="content-count">0/1000</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message-priority">Priority</label>
+                    <select id="message-priority">
+                        <option value="normal">Normal</option>
+                        <option value="high">High</option>
+                        <option value="urgent">Urgent</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="goBack()">Cancel</button>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="../js/firebase-config.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/database.js"></script>
+    <script type="module" src="../js/send-message.js"></script>
+</body>
+</html>
+
+

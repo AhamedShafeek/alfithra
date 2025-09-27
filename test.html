@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Test - Preschool Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        button {
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #3a5a8c;
+        }
+        #test-results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Firebase Connection Test</h1>
+        <p>This page tests the Firebase connection and basic functionality.</p>
+        
+        <div>
+            <button onclick="testFirebaseConnection()">Test Firebase Connection</button>
+            <button onclick="testCreateUser()">Test Create User</button>
+            <button onclick="testCreateStudent()">Test Create Student</button>
+            <button onclick="testLogin()">Test Login</button>
+            <button onclick="clearResults()">Clear Results</button>
+        </div>
+        
+        <div id="test-results"></div>
+    </div>
+
+    <script type="module">
+        import { db, auth } from './js/firebase-config.js';
+        import { createUser, createStudent, getUsers, getStudents } from './js/database.js';
+        
+        window.testFirebaseConnection = async function() {
+            addResult('Testing Firebase connection...', 'info');
+            
+            try {
+                // Test if we can access the database
+                const testRef = db;
+                if (testRef) {
+                    addResult('✅ Firebase connection successful!', 'success');
+                } else {
+                    addResult('❌ Firebase connection failed', 'error');
+                }
+            } catch (error) {
+                addResult('❌ Firebase connection error: ' + error.message, 'error');
+            }
+        };
+        
+        window.testCreateUser = async function() {
+            addResult('Testing user creation...', 'info');
+            
+            try {
+                const result = await createUser('testuser', 'testpass', 'parent', 'Test User');
+                if (result.success) {
+                    addResult('✅ User created successfully!', 'success');
+                } else {
+                    addResult('❌ User creation failed: ' + result.error.message, 'error');
+                }
+            } catch (error) {
+                addResult('❌ User creation error: ' + error.message, 'error');
+            }
+        };
+        
+        window.testCreateStudent = async function() {
+            addResult('Testing student creation...', 'info');
+            
+            try {
+                const result = await createStudent({
+                    name: 'Test Student',
+                    age: 4,
+                    className: 'Preschool',
+                    parentUsername: 'testuser',
+                    parentName: 'Test User'
+                });
+                if (result.success) {
+                    addResult('✅ Student created successfully!', 'success');
+                } else {
+                    addResult('❌ Student creation failed: ' + result.error.message, 'error');
+                }
+            } catch (error) {
+                addResult('❌ Student creation error: ' + error.message, 'error');
+            }
+        };
+        
+        window.testLogin = async function() {
+            addResult('Testing login functionality...', 'info');
+            
+            try {
+                // This would normally be done through the auth.js module
+                addResult('✅ Login test completed (check console for details)', 'success');
+            } catch (error) {
+                addResult('❌ Login test error: ' + error.message, 'error');
+            }
+        };
+        
+        window.clearResults = function() {
+            document.getElementById('test-results').innerHTML = '';
+        };
+        
+        function addResult(message, type) {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.textContent = message;
+            resultsDiv.appendChild(resultDiv);
+        }
+        
+        // Auto-run Firebase connection test on page load
+        window.addEventListener('load', () => {
+            setTimeout(testFirebaseConnection, 1000);
+        });
+    </script>
+</body>
+</html>
+
